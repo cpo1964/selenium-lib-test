@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+        	<!-- c{1} ein Level des class paths wird gezeigt (also nur der Klassenname)
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %-30c{1}:%3L - %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p - %m%n"/>
+        	-->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %-30c{1}:%3L - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="at.cpo.utils" level="ERROR">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="com.jayway" level="ERROR">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="org.apache" level="ERROR">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="org.openqa.selenium" level="ERROR">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="freemarker.cache" level="ERROR">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>
