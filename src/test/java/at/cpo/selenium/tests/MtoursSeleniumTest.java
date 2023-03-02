@@ -263,7 +263,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 				driverGet(ConfigurationHelper.getTestProperties().getProperty(remotehostUrl));
 //				setDriverImplicitlyWaitTimoutSeconds(10);
 				// Send future commands to iFrame
-//				wait(5000);
+				wait(5000);
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 //				wait(5000);
 				ok = ok && exists(mtoursLoginPage.NOTICE, 10);
