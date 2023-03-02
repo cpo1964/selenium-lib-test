@@ -23,101 +23,78 @@
  */
 package at.cpo.selenium.common.pageobjects;
 
-
-
 import com.github.cpo1964.platform.selenium.SeleniumHelper;
 
-
-
 /**
-
+ * 
  * The Class SeleniumLoginPage.
-
+ * 
  */
 
 public class MToursLoginPage extends SeleniumHelper {
 
-
-
 	/**
-
+	 * 
 	 * The constant USERNAME.
-
+	 * 
 	 */
 
 	public final String USERNAME = this.getEditFieldLocator("UsernameIN");
 
-
-
 	/**
-
+	 * 
 	 * The constant PASSWORD.
-
+	 * 
 	 */
 
 	public final String PASSWORD = this.getEditFieldLocator("PasswordIN");
 
-
-
 	/**
-
+	 * 
 	 * The constant Login.
-
+	 * 
 	 */
 
 	public final String LOGIN = this.getButtonLocator("LoginBT");
 
-	
-
 	/**
-
+	 * 
 	 * The constant LoginOk.
-
+	 * 
 	 */
 
 	public final String LOGINOK = this.getTextLocator("LoginOkTXT");
 
-
-
 	/**
-
+	 * 
 	 * The constant Login.
-
+	 * 
 	 */
 
 	public final String NOTICE = this.getButtonLocator("NoticeBT");
 
-
-
 	/**
-
+	 * 
 	 * The constant HOME.
-
+	 * 
 	 */
 
 	public final String HOME = this.getLinkLocator("HomeLN");
 
-
-
 	/**
-
+	 * 
 	 * The constant HOME.
-
+	 * 
 	 */
 
 	public final String FLIGHTS = this.getLinkLocator("FlightsLN");
 
-
-
 	/**
-
+	 * 
 	 * The constant SIGNININFO.
-
+	 * 
 	 */
 
 	public final String SIGNININFO = this.getTextLocator("SigInInfoTXT");
 
-
-
 }
-
