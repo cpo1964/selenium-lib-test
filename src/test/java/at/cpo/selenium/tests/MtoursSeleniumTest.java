@@ -207,7 +207,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		// login
 		reportCreateStep("Step #2 - login");
-		exists(mtoursLoginPage.USERNAME, 10);
+		ok = exists(mtoursLoginPage.USERNAME, 10);
 		input(mtoursLoginPage.USERNAME, username);
 		input(mtoursLoginPage.PASSWORD, password);
 		click(mtoursLoginPage.LOGIN);
@@ -251,7 +251,6 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	 * @return true, if successful
 	 */
 	private boolean navigateToStartMtoursPage() {
-		String url;
 		if (CommonHelper.isTrue(runlocal)) {
 			try {
 				driverGet(ConfigurationHelper.getTestProperties().getProperty(localhostUrl));
@@ -268,14 +267,14 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 //				wait(5000);
 				ok = ok && exists(mtoursLoginPage.NOTICE, 10);
-				wait(5000);
+//				wait(5000);
 				if (ok) {
-					wait(5000);
+//					wait(5000);
 					reportStepInfo("iframe mit notiz schliessen ...");
 					click(mtoursLoginPage.NOTICE, 10);
 					// Send future commands to main document
 					driverSwitchToDefaultContent();
-					wait(2000);
+					wait(2001);
 				}
 //				setDriverImplicitlyWaitTimoutSeconds(30);
 			} catch (Exception e2) {
