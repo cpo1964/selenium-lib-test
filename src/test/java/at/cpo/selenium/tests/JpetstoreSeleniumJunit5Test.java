@@ -23,7 +23,7 @@
  */
 package at.cpo.selenium.tests;
 
-import com.github.cpo1964.platform.PlatformHelper;
+import com.github.cpo1964.platform.selenium.SeleniumHelper;
 
 /**
  * Test Login by Selenium.
@@ -36,7 +36,7 @@ import com.github.cpo1964.platform.PlatformHelper;
  * 5) die Methoden annotiert mit @After - zb tearDown() 
  * 6) die Methode annotiert mit @AfterClass - zb tearDownAfterClass()
  */
-public class JpetstoreSeleniumJunit5Test extends PlatformHelper {
+public class JpetstoreSeleniumJunit5Test extends SeleniumHelper {
 
 //	/**
 //	 * Sets up before class.
