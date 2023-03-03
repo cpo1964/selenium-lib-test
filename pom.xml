@@ -4,7 +4,7 @@
 	<artifactId>selenium-lib-test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<selenium-java.version>4.7.2</selenium-java.version>
+		<selenium-lib>1.0.4</selenium-lib>
 		<log4j2.version>2.19.0</log4j2.version>
 		<junit4.version>4.13.2</junit4.version>
 		<junit5.version>5.9.2</junit5.version>
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>io.github.cpo1964</groupId>
 			<artifactId>selenium-lib</artifactId>
-			<version>1.0.3</version>
+			<version>${selenium-lib}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>

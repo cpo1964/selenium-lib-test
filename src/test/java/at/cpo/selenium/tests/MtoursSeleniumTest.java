@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Christian Pöcksteinera
+ * Copyright (c) 2023 Christian Pöcksteiner
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -140,7 +140,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 		reportCreateTest("TestCase #" + getIteration() + " login to MTours - runlocal: " + runlocal);
 		if (CommonHelper.isTrue(skip)) {
 			reportTestInfo("setUp: MTours test skipped");
-			setRunStatus(true);
+//			setRunStatus(true);
 			return;
 		}
 		reportTestInfo("MTours started");
@@ -163,7 +163,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	public void tearDown() {
 		if (CommonHelper.isTrue(skip)) {
 			reportTestInfo("tearDown: MTours test skipped");
-			setRunStatus(true);
+//			setRunStatus(true);
 			return;
 		}
 		
@@ -183,7 +183,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	public void doSeleniumTest() throws InterruptedException {
 		if (CommonHelper.isTrue(skip)) {
 			reportTestInfo("doSeleniumTest: MTours test skipped");
-			setRunStatus(true);
+//			setRunStatus(true);
 			return;
 		}
 
@@ -191,7 +191,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 			doTestMtours();
 		}
 		ok = isRunStatus();
-		setRunStatus(true);
+//		setRunStatus(true);
 		Assert.assertTrue(ok);
 	}
 
