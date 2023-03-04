@@ -202,12 +202,12 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep02(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, '/account/signonForm')]");
+		clickByXpath("//a[contains(@href, 'signonForm')]");
 		inputByXpath("//input[@name='username']", SeleniumStrings.EDITFIELD, username);
 		inputByXpath("//input[@name='password']", SeleniumStrings.EDITFIELD, password);
 		ok = existsByXpath("//div[@id='Signon']/form/div/div/button", true);
-		clickByXpath("//div[@id='Signon']/form/div/div/button");
-		ok = existsByXpath("//a[contains(@href, '/account/signoff')]", true);
+		clickByXpath("//input[@name='signon']");
+		ok = existsByXpath("//a[contains(@href, 'signoff')]", true);
 		validate(ok, "signonOff link is visible");
 		reportStepPassScreenshot();
 		wait(1);
@@ -220,9 +220,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep03(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, '/account/signoff')]");
-		ok = existsByXpath("//a[contains(text(),'Sign Up')]", true);
-		validate(ok, "Sign Up link is visible");
+		clickByXpath("//a[contains(@href, 'signoff')]");
+		ok = existsByXpath("//a[contains(@href, 'signonForm')]", true);
+		validate(ok, "SignIn link is visible");
 		reportStepPassScreenshot();
 	}
 
