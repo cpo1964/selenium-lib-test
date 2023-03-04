@@ -190,7 +190,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep01(String msg) {
 		reportCreateStep(msg);
 		validate(navigateToStartJpetstorePage(), "Jpetstore app started");
-		ok = existsByXpath("//a[contains(@href, 'signonForm')]", true);
+		ok = existsByXpath("//a[contains(@href, 'signonForm')]", 10);
 		validate(ok, "signonForm is visible");
 		reportStepPassScreenshot();
 	}
@@ -203,15 +203,14 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep02(String msg) {
 		reportCreateStep(msg);
 		clickByXpath("//a[contains(@href, 'signonForm')]");
-		ok = existsByXpath("//input[@name='username']", 3);
+
+		ok = existsByXpath("//input[@name='username']", 10);
 		validate(ok, "input 'username' is visible");
 		inputByXpath("//input[@name='username']", SeleniumStrings.EDITFIELD, username);
 		inputByXpath("//input[@name='password']", SeleniumStrings.EDITFIELD, password);
 		clickByXpath("//input[@name='signon']");
-		wait(2000);
-//		ok = isClickableByXpath("//a[contains(@href, 'signoff')]",5);
-		ok = existsByXpath("//a[contains(@href, 'signoff')]", 3);
-//		ok = existsByXpath("//a[contains(text(), 'Sign Out')]", 3);
+
+		ok = existsByXpath("//a[contains(@href, 'signoff')]", 10);
 		validate(ok, "signonOff link is visible");
 		reportStepPassScreenshot();
 		wait(1);
@@ -224,9 +223,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep03(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, 'signoff')]");
-		wait(2000);
-		ok = existsByXpath("//*[contains(@href, 'signonForm')]", 3);
+		clickByXpath("//a[contains(@href, 'signoff')]");//		wait(2000);
+
+		ok = existsByXpath("//*[contains(@href, 'signonForm')]", 10);
 		validate(ok, "SignIn link is visible");
 		reportStepPassScreenshot();
 	}
