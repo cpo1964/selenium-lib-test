@@ -1,2 +1,3 @@
 # selenium-lib-test
-Test the project com.github.cpo1964
+Test the project https://github.com/cpo1964/selenium-lib
+
