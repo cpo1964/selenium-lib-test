@@ -190,7 +190,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep01(String msg) {
 		reportCreateStep(msg);
 		validate(navigateToStartJpetstorePage(), "Jpetstore app started");
-		ok = existsByXpath("//a[contains(@href, '/account/signonForm')]", true);
+		ok = existsByXpath("//a[contains(@href, 'signonForm')]", true);
 		validate(ok, "signonForm is visible");
 		reportStepPassScreenshot();
 	}
@@ -203,9 +203,11 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep02(String msg) {
 		reportCreateStep(msg);
 		clickByXpath("//a[contains(@href, 'signonForm')]");
+		ok = existsByXpath("//input[@name='username']", 3);
+		validate(ok, "input 'username' is visible");
 		inputByXpath("//input[@name='username']", SeleniumStrings.EDITFIELD, username);
 		inputByXpath("//input[@name='password']", SeleniumStrings.EDITFIELD, password);
-		ok = existsByXpath("//div[@id='Signon']/form/div/div/button", true);
+		ok = existsByXpath("//input[@name='signon']", true);
 		clickByXpath("//input[@name='signon']");
 		ok = existsByXpath("//a[contains(@href, 'signoff')]", true);
 		validate(ok, "signonOff link is visible");
