@@ -232,12 +232,15 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 * @return true, if successful
 	 */
 	private boolean navigateToStartJpetstorePage() {
+		String startUpUrl = "";
 		try {
 			if (CommonHelper.isTrue(runlocal)) {
-				driverGet(ConfigurationHelper.getTestProperties().getProperty(localhostUrl));
+				startUpUrl = ConfigurationHelper.getTestProperties().getProperty(localhostUrl);
 			} else {
-				driverGet(ConfigurationHelper.getTestProperties().getProperty(remotehostUrl));
+				startUpUrl = ConfigurationHelper.getTestProperties().getProperty(remotehostUrl);
 			}
+			reportStepInfo("startUpUrl: " + startUpUrl);
+			driverGet(startUpUrl);
 			reportTestPass("JPetstore started");
 		} catch (Exception e1) {
 			reportTestFail("JPetstore is down");
