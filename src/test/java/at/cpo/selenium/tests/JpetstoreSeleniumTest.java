@@ -26,8 +26,6 @@ package at.cpo.selenium.tests;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.naming.ConfigurationException;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -37,9 +35,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
+import org.openqa.selenium.By;
 
 import com.github.cpo1964.platform.selenium.SeleniumHelper;
-import com.github.cpo1964.platform.selenium.SeleniumStrings;
+import com.github.cpo1964.platform.selenium.WebelementType;
 import com.github.cpo1964.utils.CommonHelper;
 
 
@@ -85,12 +84,10 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 *
 	 * @return the data
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ConfigurationException 
 	 */
 	@Parameterized.Parameters // (name = "{index}: {0}")
-	public static Collection<?> getData() throws IOException, ConfigurationException {
-//		new SeleniumHelper().commonSetup(ConfigurationHelper.getTestDataPath());
-		return getTestdata(ConfigurationHelper.getTestDataPath(), JpetstoreSeleniumTest.class.getSimpleName());
+	public static Collection<?> getData() throws IOException {
+		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(), JpetstoreSeleniumTest.class.getSimpleName());
 	}
 
 	/**
@@ -112,11 +109,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	/**
 	 * Sets the up.
 	 *
-	 * @throws IOException          Signals that an I/O exception has occurred.
-	 * @throws InterruptedException the interrupted exception
 	 */
 	@Before
-	public void setUp() throws IOException, InterruptedException {
+	public void setUp() {
 		setIteration(getIteration() + 1);
 		reportCreateTest("TestCase #" + getIteration() + " login to Jpetstore - runlocal: " + runlocal);
 		if (CommonHelper.isTrue(skip)) {
@@ -126,8 +121,8 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 
 		reportTestInfo("Jpetstore started");
 		reportTestInfo("<br>Testparameter:<br>" +
-				"username: '" + username + "'<br>" + 
-				"password: '" + password + "'<br>" + 
+				"username: '" + username + "'<br>" +
+				"password: '" + password + "'<br>" +
 				"localhostUrl: '" + localhostUrl + "'<br>" +
 				"remotehostUrl: '" + remotehostUrl + "'<br>" +
 				"runlocal: '" + runlocal + "'<br>");
@@ -146,7 +141,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 			reportTestInfo("tearDown: Jpetstore test skipped ...<br>");
 			return;
 		}
-		
+
 		reportCreateStep("tearDown #");
 		closeBrowser();
 
@@ -156,10 +151,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	/**
 	 * Smoke test.
 	 *
-	 * @throws InterruptedException the interrupted exception
 	 */
 	@Test
-	public void doSeleniumTest() throws InterruptedException {
+	public void doSeleniumTest() {
 		if (CommonHelper.isTrue(skip)) {
 			reportTestInfo("doSeleniumTest: Jpetstore test skipped ...");
 			return;
@@ -190,8 +184,6 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep01(String msg) {
 		reportCreateStep(msg);
 		validate(navigateToStartJpetstorePage(), "Jpetstore app started");
-		ok = existsByXpath("//a[contains(@href, 'signonForm')]", 10);
-		validate(ok, "signonForm is visible");
 		reportStepPassScreenshot();
 	}
 
@@ -204,14 +196,10 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		reportCreateStep(msg);
 		clickByXpath("//a[contains(@href, 'signonForm')]");
 
-		ok = existsByXpath("//input[@name='username']", 10);
-		validate(ok, "input 'username' is visible");
-		inputByXpath("//input[@name='username']", SeleniumStrings.EDITFIELD, username);
-		inputByXpath("//input[@name='password']", SeleniumStrings.EDITFIELD, password);
+		inputByXpath("//input[@name='username']", WebelementType.EDITFIELD.name(), username);
+		inputByXpath("//input[@name='password']", WebelementType.EDITFIELD.name(), password);
 		clickByXpath("//input[@name='signon']");
 
-		ok = existsByXpath("//a[contains(@href, 'signoff')]", 10);
-		validate(ok, "signonOff link is visible");
 		reportStepPassScreenshot();
 		wait(1);
 	}
@@ -223,9 +211,11 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep03(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, 'signoff')]");//		wait(2000);
+		clickByXpath("//a[contains(@href, 'signoff')]");
 
-		ok = existsByXpath("//*[contains(@href, 'signonForm')]", 10);
+		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signoff')]"), NotFound, 3, true);
+		validate(ok, "SignOut link is NOT visible");
+		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, true);
 		validate(ok, "SignIn link is visible");
 		reportStepPassScreenshot();
 	}
@@ -236,7 +226,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 * @return true, if successful
 	 */
 	private boolean navigateToStartJpetstorePage() {
-		String startUpUrl = "";
+		String startUpUrl;
 		try {
 			if (CommonHelper.isTrue(runlocal)) {
 				startUpUrl = ConfigurationHelper.getTestProperties().getProperty(localhostUrl);
@@ -256,25 +246,24 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	/**
 	 * Test signin test case.
 	 *
-	 * @throws Exception the exception
 	 */
-	public void testSigninTestCase() throws Exception {
-		clickByXpath("//a[contains(@href, '/account/newAccountForm')]");
-		inputByXpath("//input[@name='username']", SeleniumStrings.EDITFIELD, "j2ee");
-		inputByXpath("//input[@name='password']", SeleniumStrings.EDITFIELD, "j2ee");
-		inputByXpath("//input[@name='repeatedPassword']", SeleniumStrings.EDITFIELD, "Test");
-		inputByXpath("//input[@name='firstName']", SeleniumStrings.EDITFIELD, "Cpo");
-		inputByXpath("//input[@name='lastName']", SeleniumStrings.EDITFIELD, "Cpo");
-		inputByXpath("//input[@name='email']", SeleniumStrings.EDITFIELD, "cpo1964@aon.at");
-		inputByXpath("//input[@name='phone']", SeleniumStrings.EDITFIELD, "12345");
-		inputByXpath("//input[@name='address1']", SeleniumStrings.EDITFIELD, "cpo 1");
-		inputByXpath("//input[@name='address2']", SeleniumStrings.EDITFIELD, "cpo 2");
-		inputByXpath("//input[@name='city']", SeleniumStrings.EDITFIELD, "Cpo");
-		inputByXpath("//input[@name='state']", SeleniumStrings.EDITFIELD, "Cpostate");
-		inputByXpath("//input[@name='zip']", SeleniumStrings.EDITFIELD, "1111");
-		inputByXpath("//input[@name='country']", SeleniumStrings.EDITFIELD, "Cpocountry");
+	public void doTestSigninTestCase() {
+		clickByXpath("//a[contains(@href, 'newAccountForm')]");
+		inputByXpath("//input[@name='username']", WebelementType.EDITFIELD.name(), "j2ee");
+		inputByXpath("//input[@name='password']", WebelementType.EDITFIELD.name(), "j2ee");
+		inputByXpath("//input[@name='repeatedPassword']", WebelementType.EDITFIELD.name(), "Test");
+		inputByXpath("//input[@name='firstName']", WebelementType.EDITFIELD.name(), "Cpo");
+		inputByXpath("//input[@name='lastName']", WebelementType.EDITFIELD.name(), "Cpo");
+		inputByXpath("//input[@name='email']", WebelementType.EDITFIELD.name(), "cpo1964@aon.at");
+		inputByXpath("//input[@name='phone']", WebelementType.EDITFIELD.name(), "12345");
+		inputByXpath("//input[@name='address1']", WebelementType.EDITFIELD.name(), "cpo 1");
+		inputByXpath("//input[@name='address2']", WebelementType.EDITFIELD.name(), "cpo 2");
+		inputByXpath("//input[@name='city']", WebelementType.EDITFIELD.name(), "Cpo");
+		inputByXpath("//input[@name='state']", WebelementType.EDITFIELD.name(), "Cpostate");
+		inputByXpath("//input[@name='zip']", WebelementType.EDITFIELD.name(), "1111");
+		inputByXpath("//input[@name='country']", WebelementType.EDITFIELD.name(), "Cpocountry");
 		clickByXpath("//select[@name='languagePreference']");
-		inputByXpath("//select[@name='languagePreference']", SeleniumStrings.LISTBOX, "German");
+		inputByXpath("//select[@name='languagePreference']", WebelementType.LISTBOX.name(), "German");
 		clickByXpath("//option[@value='german']");
 		clickByXpath("//input[@name='listOption']");
 		clickByXpath("//input[@name='bannerOption']");

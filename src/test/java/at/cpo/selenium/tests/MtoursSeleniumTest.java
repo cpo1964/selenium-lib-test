@@ -28,6 +28,9 @@ import java.util.Collection;
 
 import javax.naming.ConfigurationException;
 
+import com.github.cpo1964.platform.selenium.SeleniumInterface;
+import com.github.cpo1964.platform.selenium.WebelementState;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
@@ -109,7 +112,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	@Parameterized.Parameters // (name = "{index}: {0}")
 	public static Collection<?> getData() throws IOException, ConfigurationException {
 //		new SeleniumHelper().commonSetup(ConfigurationHelper.getTestDataPath());
-		return getTestdata(ConfigurationHelper.getTestDataPath(), MtoursSeleniumTest.class.getSimpleName());
+		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(), MtoursSeleniumTest.class.getSimpleName());
 	}
 
 	/**
@@ -207,7 +210,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		// login
 		reportCreateStep("Step #2 - login");
-		ok = exists(mtoursLoginPage.USERNAME, 10);
+		ok = waitUntil(mtoursLoginPage.USERNAME, WebelementState.Displayed, 10);
 		input(mtoursLoginPage.USERNAME, username);
 		input(mtoursLoginPage.PASSWORD, password);
 		click(mtoursLoginPage.LOGIN);
@@ -221,7 +224,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		reportStepPassScreenshot();
 		if ("false".equalsIgnoreCase(runlocal)) {
-			ok = exists(mtoursLoginPage.FLIGHTS, 3);
+			ok = waitUntil(mtoursLoginPage.FLIGHTS, WebelementState.Displayed, 3);
 			if (ok) {
 				click(mtoursLoginPage.FLIGHTS);
 			}
@@ -233,7 +236,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		// navigate to Home
 		reportCreateStep("Step #3 - navigate to Home");
-		ok = exists(mtoursLoginPage.HOME, 3);
+		ok = waitUntil(mtoursLoginPage.HOME, WebelementState.Displayed, 3);
 		if (ok || "false".equalsIgnoreCase(runlocal)) {
 			click(mtoursLoginPage.HOME);
 			value = output(mtoursLoginPage.SIGNININFO);
@@ -266,12 +269,12 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 				wait(5000);
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 //				wait(5000);
-				ok = ok && exists(mtoursLoginPage.NOTICE, 10);
+				ok = ok && waitUntil(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
 //				wait(5000);
 				if (ok) {
 //					wait(5000);
 					reportStepInfo("iframe mit notiz schliessen ...");
-					click(mtoursLoginPage.NOTICE, 10);
+					click(mtoursLoginPage.NOTICE);
 					// Send future commands to main document
 					driverSwitchToDefaultContent();
 					wait(2001);
