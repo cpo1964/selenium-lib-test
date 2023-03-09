@@ -41,7 +41,6 @@ import com.github.cpo1964.platform.selenium.SeleniumHelper;
 import com.github.cpo1964.platform.selenium.WebelementType;
 import com.github.cpo1964.utils.CommonHelper;
 
-
 /**
  * Test Login by Selenium.
  */
@@ -87,7 +86,8 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	@Parameterized.Parameters // (name = "{index}: {0}")
 	public static Collection<?> getData() throws IOException {
-		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(), JpetstoreSeleniumTest.class.getSimpleName());
+		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(),
+				JpetstoreSeleniumTest.class.getSimpleName());
 	}
 
 	/**
@@ -120,12 +120,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		}
 
 		reportTestInfo("Jpetstore started");
-		reportTestInfo("<br>Testparameter:<br>" +
-				"username: '" + username + "'<br>" +
-				"password: '" + password + "'<br>" +
-				"localhostUrl: '" + localhostUrl + "'<br>" +
-				"remotehostUrl: '" + remotehostUrl + "'<br>" +
-				"runlocal: '" + runlocal + "'<br>");
+		reportTestInfo("<br>Testparameter:<br>" + "username: '" + username + "'<br>" + "password: '" + password
+				+ "'<br>" + "localhostUrl: '" + localhostUrl + "'<br>" + "remotehostUrl: '" + remotehostUrl + "'<br>"
+				+ "runlocal: '" + runlocal + "'<br>");
 
 		reportCreateStep("setUp TestCase #" + getIteration() + " #");
 
@@ -173,7 +170,8 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void doTestJpetstore() {
 		testStep01("Step #1 - start Jpetstore");
 		testStep02("Step #2 - Login to Jpetstore");
-		testStep03("Step #3 - Logout of Jpetstore");
+		testStep03("Step #3 - My Account");
+		testStep04("Step #4 - Logout of Jpetstore");
 	}
 
 	/**
@@ -211,12 +209,30 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep03(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, 'signoff')]");
 
+		clickByXpath("//a[contains(text(),'My Account')]");
+		inputByXpath("//select[@name='account.languagePreference']", WebelementType.LISTBOX.name(), "japanese");
+		inputByXpath("//select[@name='account.languagePreference']", WebelementType.LISTBOX.name(), "english");
+		clickByXpath("//form[@action='/actions/Account.action']");
+		clickByXpath("//select[@name='account.favouriteCategoryId']");
+		inputByXpath("//select[@name='account.favouriteCategoryId']", WebelementType.LISTBOX.name(), "DOGS");
+		inputByXpath("(.//*[normalize-space(text()) and normalize-space(.)='Enable MyBanner'])[1]/preceding::td[1]", 
+				WebelementType.CHECKBOX.name(), "ON");
+		inputByXpath("//input[@name='account.listOption']", 
+				WebelementType.CHECKBOX.name(), "OFF");
+
+		reportStepPassScreenshot();
+	}
+
+	private void testStep04(String msg) {
+		reportCreateStep(msg);
+
+		clickByXpath("//a[contains(@href, 'signoff')]");
 		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signoff')]"), NotFound, 3, true);
 		validate(ok, "SignOut link is NOT visible");
 		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, true);
 		validate(ok, "SignIn link is visible");
+
 		reportStepPassScreenshot();
 	}
 
