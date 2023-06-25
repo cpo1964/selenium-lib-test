@@ -7,10 +7,10 @@ First include
 		<dependency>
 			<groupId>com.github.cpo1964</groupId>
 			<artifactId>selenium-lib</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.0.x</version>
 		</dependency>
 
-to the pom.xml
+to the pom.xml (hint: use latest available version)
 
 <b>Run all existing junit4 tests:</b>
 
