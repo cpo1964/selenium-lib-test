@@ -12,6 +12,8 @@ First include
 
 to the pom.xml (hint: use latest available version)
 
+Use Java 11 or newer!
+
 <b>Run all existing junit4 tests:</b>
 
 - open console window (windows command or linux shell)
