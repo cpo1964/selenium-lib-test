@@ -216,19 +216,18 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		inputByXpath("//select[@name='account.favouriteCategoryId']", WebelementType.LISTBOX.name(), "DOGS");
 		inputByXpath("(.//*[normalize-space(text()) and normalize-space(.)='Enable MyBanner'])[1]/preceding::td[1]", 
 				WebelementType.CHECKBOX.name(), "ON");
-		inputByXpath("//input[@name='account.listOption']", 
-				WebelementType.CHECKBOX.name(), "OFF");
 
 		reportStepPassScreenshot();
 	}
 
 	private void testStep04(String msg) {
 		reportCreateStep(msg);
+		wait(2);
 
-		clickByXpath("//a[contains(@href, 'signoff')]");
-		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signoff')]"), NotFound, 3, true);
+		clickByXpath("//a[contains(@href, '/actions/Account.action?signoff=')]");
+		ok = waitUntilBy(By.xpath("//a[contains(@href, '/actions/Account.action?signoff=')]"), NotFound, 3, true);
 		validate(ok, "SignOut link is NOT visible");
-		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, true);
+		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, 3, true);
 		validate(ok, "SignIn link is visible");
 
 		reportStepPassScreenshot();
