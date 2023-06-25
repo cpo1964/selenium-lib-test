@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>selenium-lib-test</groupId>
+	<artifactId>selenium-lib-test</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<selenium-lib>1.0.44</selenium-lib>
+		<log4j2.version>2.19.0</log4j2.version>
+		<junit4.version>4.13.2</junit4.version>
+		<junit5.version>5.9.2</junit5.version>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.github.cpo1964/selenium-lib -->
+		<dependency>
+			<groupId>io.github.cpo1964</groupId>
+			<artifactId>selenium-lib</artifactId>
+			<version>${selenium-lib}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit4.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine 
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit5.version}</version>
+			<scope>test</scope>
+		</dependency>
+		-->
+	</dependencies>
+
+	<build>
+	<plugins>
+	<plugin>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.8.1</version>
+		<configuration>
+			<source>${java.version}</source>
+			<target>${java.version}</target>
+		</configuration>
+	</plugin>
+	</plugins>
+	</build>
+
+</project>
