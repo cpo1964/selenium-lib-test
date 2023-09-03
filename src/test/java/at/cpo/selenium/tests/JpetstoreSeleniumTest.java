@@ -190,11 +190,11 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep02(String msg) {
 		reportCreateStep(msg);
-		clickByXpath("//a[contains(@href, 'signonForm')]");
+		click("//a[contains(@href, 'signonForm')]");
 
-		inputByXpath("//input[@name='username']", WebelementType.EDITFIELD.name(), username);
-		inputByXpath("//input[@name='password']", WebelementType.EDITFIELD.name(), password);
-		clickByXpath("//input[@name='signon']");
+		input("//input[@name='username']", WebelementType.EDITFIELD, username);
+		input("//input[@name='password']", WebelementType.EDITFIELD, password);
+		click("//input[@name='signon']");
 
 		reportStepPassScreenshot();
 		wait(1);
@@ -208,14 +208,14 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	private void testStep03(String msg) {
 		reportCreateStep(msg);
 
-		clickByXpath("//a[contains(text(),'My Account')]");
-		inputByXpath("//select[@name='account.languagePreference']", WebelementType.LISTBOX.name(), "japanese");
-		inputByXpath("//select[@name='account.languagePreference']", WebelementType.LISTBOX.name(), "english");
-		clickByXpath("//form[@action='/actions/Account.action']");
-		clickByXpath("//select[@name='account.favouriteCategoryId']");
-		inputByXpath("//select[@name='account.favouriteCategoryId']", WebelementType.LISTBOX.name(), "DOGS");
-		inputByXpath("(.//*[normalize-space(text()) and normalize-space(.)='Enable MyBanner'])[1]/preceding::td[1]", 
-				WebelementType.CHECKBOX.name(), "ON");
+		click("//a[contains(text(),'My Account')]");
+		input("//select[@name='account.languagePreference']", WebelementType.LISTBOX, "japanese");
+		input("//select[@name='account.languagePreference']", WebelementType.LISTBOX, "english");
+		click("//form[@action='/actions/Account.action']");
+		click("//select[@name='account.favouriteCategoryId']");
+		input("//select[@name='account.favouriteCategoryId']", WebelementType.LISTBOX, "DOGS");
+		input("(.//*[normalize-space(text()) and normalize-space(.)='Enable MyBanner'])[1]/preceding::td[1]", 
+				WebelementType.CHECKBOX, "ON");
 
 		reportStepPassScreenshot();
 	}
@@ -229,7 +229,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		reportCreateStep(msg);
 		wait(2);
 
-		clickByXpath("//a[contains(@href, '/actions/Account.action?signoff=')]");
+		click("//a[contains(@href, '/actions/Account.action?signoff=')]");
 		ok = waitUntilBy(By.xpath("//a[contains(@href, '/actions/Account.action?signoff=')]"), NotFound, 3, true);
 		validate(ok, "SignOut link is NOT visible");
 		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, 3, true);
@@ -266,26 +266,26 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 *
 	 */
 	public void doTestSigninTestCase() {
-		clickByXpath("//a[contains(@href, 'newAccountForm')]");
-		inputByXpath("//input[@name='username']", WebelementType.EDITFIELD.name(), "j2ee");
-		inputByXpath("//input[@name='password']", WebelementType.EDITFIELD.name(), "j2ee");
-		inputByXpath("//input[@name='repeatedPassword']", WebelementType.EDITFIELD.name(), "Test");
-		inputByXpath("//input[@name='firstName']", WebelementType.EDITFIELD.name(), "Cpo");
-		inputByXpath("//input[@name='lastName']", WebelementType.EDITFIELD.name(), "Cpo");
-		inputByXpath("//input[@name='email']", WebelementType.EDITFIELD.name(), "cpo1964@aon.at");
-		inputByXpath("//input[@name='phone']", WebelementType.EDITFIELD.name(), "12345");
-		inputByXpath("//input[@name='address1']", WebelementType.EDITFIELD.name(), "cpo 1");
-		inputByXpath("//input[@name='address2']", WebelementType.EDITFIELD.name(), "cpo 2");
-		inputByXpath("//input[@name='city']", WebelementType.EDITFIELD.name(), "Cpo");
-		inputByXpath("//input[@name='state']", WebelementType.EDITFIELD.name(), "Cpostate");
-		inputByXpath("//input[@name='zip']", WebelementType.EDITFIELD.name(), "1111");
-		inputByXpath("//input[@name='country']", WebelementType.EDITFIELD.name(), "Cpocountry");
-		clickByXpath("//select[@name='languagePreference']");
-		inputByXpath("//select[@name='languagePreference']", WebelementType.LISTBOX.name(), "German");
-		clickByXpath("//option[@value='german']");
-		clickByXpath("//input[@name='listOption']");
-		clickByXpath("//input[@name='bannerOption']");
-		clickByXpath("//div[@id='CenterForm']/form/div/button");
+		click("//a[contains(@href, 'newAccountForm')]");
+		input("//input[@name='username']", WebelementType.EDITFIELD, "j2ee");
+		input("//input[@name='password']", WebelementType.EDITFIELD, "j2ee");
+		input("//input[@name='repeatedPassword']", WebelementType.EDITFIELD, "Test");
+		input("//input[@name='firstName']", WebelementType.EDITFIELD, "Cpo");
+		input("//input[@name='lastName']", WebelementType.EDITFIELD, "Cpo");
+		input("//input[@name='email']", WebelementType.EDITFIELD, "cpo1964@aon.at");
+		input("//input[@name='phone']", WebelementType.EDITFIELD, "12345");
+		input("//input[@name='address1']", WebelementType.EDITFIELD, "cpo 1");
+		input("//input[@name='address2']", WebelementType.EDITFIELD, "cpo 2");
+		input("//input[@name='city']", WebelementType.EDITFIELD, "Cpo");
+		input("//input[@name='state']", WebelementType.EDITFIELD, "Cpostate");
+		input("//input[@name='zip']", WebelementType.EDITFIELD, "1111");
+		input("//input[@name='country']", WebelementType.EDITFIELD, "Cpocountry");
+		click("//select[@name='languagePreference']");
+		input("//select[@name='languagePreference']", WebelementType.LISTBOX, "German");
+		click("//option[@value='german']");
+		click("//input[@name='listOption']");
+		click("//input[@name='bannerOption']");
+		click("//div[@id='CenterForm']/form/div/button");
 	}
 
 }
