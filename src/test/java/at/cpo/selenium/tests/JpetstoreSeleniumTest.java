@@ -220,6 +220,11 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		reportStepPassScreenshot();
 	}
 
+	/**
+	 * Test step 04.
+	 *
+	 * @param msg the msg
+	 */
 	private void testStep04(String msg) {
 		reportCreateStep(msg);
 		wait(2);

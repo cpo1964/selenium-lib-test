@@ -47,20 +47,17 @@ import com.github.cpo1964.utils.CommonHelper;
 import at.cpo.selenium.common.pageobjects.MToursFlightsPage;
 import at.cpo.selenium.common.pageobjects.MToursLoginPage;
 
-
 /**
  * Test Login by Selenium.
  */
 @RunWith(Parameterized.class)
-/* 
- * ein JUnit Test
- * Aufrufreihenfolge:
- * 1) die Methoden annotiert mit @Parameterized.Parameters - zb getData()
- * 2) die Methode annotiert mit @BeforeClass - zb setUpBeforeClass()
- * 3) die Methoden annotiert mit @Before - zb setUp()
- * 4) die Methoden annotiert mit @Test - zb doSeleniumTest()
- * 5) die Methoden annotiert mit @After - zb tearDown()
- * 6) die Methode annotiert mit @AfterClass - zb tearDownAfterClass()
+/*
+ * ein JUnit Test Aufrufreihenfolge: 1) die Methoden annotiert
+ * mit @Parameterized.Parameters - zb getData() 2) die Methode annotiert
+ * mit @BeforeClass - zb setUpBeforeClass() 3) die Methoden annotiert
+ * mit @Before - zb setUp() 4) die Methoden annotiert mit @Test - zb
+ * doSeleniumTest() 5) die Methoden annotiert mit @After - zb tearDown() 6) die
+ * Methode annotiert mit @AfterClass - zb tearDownAfterClass()
  */
 public class MtoursSeleniumTest extends SeleniumHelper {
 
@@ -94,24 +91,29 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	 */
 	@Parameter(5)
 	public String runlocal;
-	
+
 	/**
-	/** The logger. */
+	 * /** The logger.
+	 */
 	protected Logger log = LogManager.getLogger(this.getClass().getSimpleName());
-	
+
+	/** The Constant mtoursLoginPage. */
 	private final static MToursLoginPage mtoursLoginPage = new MToursLoginPage();
+	
+	/** The Constant mtoursFlightsPage. */
 	private final static MToursFlightsPage mtoursFlightsPage = new MToursFlightsPage();
 
 	/**
 	 * Gets the data.
 	 *
 	 * @return the data
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ConfigurationException 
+	 * @throws IOException            Signals that an I/O exception has occurred.
+	 * @throws ConfigurationException the configuration exception
 	 */
 	@Parameterized.Parameters // (name = "{index}: {0}")
 	public static Collection<?> getData() throws IOException, ConfigurationException {
-		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(), MtoursSeleniumTest.class.getSimpleName());
+		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(),
+				MtoursSeleniumTest.class.getSimpleName());
 	}
 
 	/**
@@ -146,12 +148,9 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 		}
 		setPassed();
 		reportTestInfo("MTours started");
-		reportTestInfo("<br>Testparameter:<br>" +
-				"username: '" + username + "'<br>" + 
-				"password: '" + password + "'<br>" + 
-				"localhostUrl: '" + localhostUrl + "'<br>" +
-				"remotehostUrl: '" + remotehostUrl + "'<br>" +
-				"runlocal: '" + runlocal + "'<br>");
+		reportTestInfo("<br>Testparameter:<br>" + "username: '" + username + "'<br>" + "password: '" + password
+				+ "'<br>" + "localhostUrl: '" + localhostUrl + "'<br>" + "remotehostUrl: '" + remotehostUrl + "'<br>"
+				+ "runlocal: '" + runlocal + "'<br>");
 
 		reportCreateStep("setUp TestCase #" + getIteration() + " #");
 
@@ -167,7 +166,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 			reportTestInfo("tearDown: MTours test skipped");
 			return;
 		}
-		
+
 		reportCreateStep("tearDown #");
 		closeBrowser();
 
@@ -192,10 +191,10 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 		Assert.assertTrue(isPassed());
 	}
 
-		/**
-		 * Do test mtours.
-		 */
-		private void doTestMtours() {
+	/**
+	 * Do test mtours.
+	 */
+	private void doTestMtours() {
 
 		// start MTours
 		reportCreateStep("Step #1 - start MTours");
