@@ -23,6 +23,7 @@
  */
 package at.cpo.selenium.common.pageobjects;
 
+import com.github.cpo1964.platform.selenium.LocatorHelper;
 import com.github.cpo1964.platform.selenium.SeleniumHelper;
 
 /**
@@ -30,14 +31,16 @@ import com.github.cpo1964.platform.selenium.SeleniumHelper;
  */
 public class MToursFlightsPage extends SeleniumHelper {
 
+	Class<MToursFlightsPage> page = MToursFlightsPage.class;
+
 	/**
 	 * The constant USERNAME.
 	 */
-	public final String PASSENGERCOUNT = this.getListboxLocator("PassCountLB");
+	public final String PASSENGERCOUNT = LocatorHelper.getListboxLocator(page, "PassCountLB");
 
 	/**
 	 * The constant PASSWORD.
 	 */
-	public final String SERVICECLASS_FIRST = this.getRadiogroupLocator("ServClassRB");
+	public final String SERVICECLASS_FIRST = LocatorHelper.getRadiogroupLocator(page, "ServClassRB");
 
 }

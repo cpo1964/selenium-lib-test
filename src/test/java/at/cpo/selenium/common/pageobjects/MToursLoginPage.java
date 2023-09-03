@@ -23,6 +23,7 @@
  */
 package at.cpo.selenium.common.pageobjects;
 
+import com.github.cpo1964.platform.selenium.LocatorHelper;
 import com.github.cpo1964.platform.selenium.SeleniumHelper;
 
 /**
@@ -32,6 +33,8 @@ import com.github.cpo1964.platform.selenium.SeleniumHelper;
  */
 
 public class MToursLoginPage extends SeleniumHelper {
+	
+	Class<MToursLoginPage> page = MToursLoginPage.class;
 
 	/**
 	 * 
@@ -39,7 +42,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String USERNAME = this.getEditFieldLocator("UsernameIN");
+	public final String USERNAME = LocatorHelper.getEditFieldLocator(page, "UsernameIN");
 
 	/**
 	 * 
@@ -47,7 +50,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String PASSWORD = this.getEditFieldLocator("PasswordIN");
+	public final String PASSWORD = LocatorHelper.getEditFieldLocator(page, "PasswordIN");
 
 	/**
 	 * 
@@ -55,7 +58,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String LOGIN = this.getButtonLocator("LoginBT");
+	public final String LOGIN = LocatorHelper.getButtonLocator(page, "LoginBT");
 
 	/**
 	 * 
@@ -63,7 +66,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String LOGINOK = this.getTextLocator("LoginOkTXT");
+	public final String LOGINOK = LocatorHelper.getTextLocator(page, "LoginOkTXT");
 
 	/**
 	 * 
@@ -71,7 +74,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String NOTICE = this.getButtonLocator("NoticeBT");
+	public final String NOTICE = LocatorHelper.getButtonLocator(page, "NoticeBT");
 
 	/**
 	 * 
@@ -79,7 +82,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String HOME = this.getLinkLocator("HomeLN");
+	public final String HOME = LocatorHelper.getLinkLocator(page, "HomeLN");
 
 	/**
 	 * 
@@ -87,7 +90,7 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String FLIGHTS = this.getLinkLocator("FlightsLN");
+	public final String FLIGHTS = LocatorHelper.getLinkLocator(page, "FlightsLN");
 
 	/**
 	 * 
@@ -95,6 +98,6 @@ public class MToursLoginPage extends SeleniumHelper {
 	 * 
 	 */
 
-	public final String SIGNININFO = this.getTextLocator("SigInInfoTXT");
+	public final String SIGNININFO = LocatorHelper.getTextLocator(page, "SigInInfoTXT");
 
 }
