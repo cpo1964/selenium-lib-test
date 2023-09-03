@@ -4,7 +4,7 @@
 	<artifactId>selenium-lib-test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<selenium-lib>1.0.47</selenium-lib>
+		<selenium-lib>1.0.48</selenium-lib>
 		<log4j2.version>2.19.0</log4j2.version>
 		<junit4.version>4.13.2</junit4.version>
 		<junit5.version>5.9.2</junit5.version>
