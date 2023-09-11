@@ -247,9 +247,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		String startUpUrl;
 		try {
 			if (CommonHelper.isTrue(runlocal)) {
-				startUpUrl = ConfigurationHelper.getTestProperties().getProperty(localhostUrl);
+				startUpUrl = ConfigurationHelper.getTestPlatformProperty(localhostUrl);
 			} else {
-				startUpUrl = ConfigurationHelper.getTestProperties().getProperty(remotehostUrl);
+				startUpUrl = ConfigurationHelper.getTestPlatformProperty(remotehostUrl);
 			}
 			reportStepInfo("startUpUrl: " + startUpUrl);
 			driverGet(startUpUrl);

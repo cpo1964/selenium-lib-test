@@ -12,9 +12,12 @@ import com.github.cpo1964.platform.selenium.SeleniumStrings;
  */
 public class ConfigurationHelper {
 	
-	/** The sh. */
-	private static SeleniumHelper sh = new SeleniumHelper();
+	/** The selenium helper. */
+	private static SeleniumHelper seleniumHelper = new SeleniumHelper();
 
+	/** The test properties. */
+	static Properties testProperties = null;
+	
 	/**
 	 * Gets the mandant.
 	 *
@@ -58,19 +61,21 @@ public class ConfigurationHelper {
 	 *
 	 * @return the test properties
 	 */
-	public static Properties getTestProperties() {
-		String path = getTestDataPath() + File.separator + "test-platform.properties";
-		Properties props = sh.getTestPlatformProperties(path);
-		return props;
+	private static Properties getTestProperties() {
+		if (testProperties == null) {
+			String path = getTestDataPath() + File.separator + "test-platform.properties";
+			testProperties = seleniumHelper.getTestPlatformProperties(path);
+		}
+		return testProperties;
 	}
 	
 	/**
-	 * Gets the start url.
+	 * Gets the test platform property.
 	 *
 	 * @param key the key
-	 * @return the start url
+	 * @return the test platform property
 	 */
-	public static String getStartUrl(String key) {
+	public static String getTestPlatformProperty(String key) {
 		return getTestProperties().getProperty(key);
 	}
 	

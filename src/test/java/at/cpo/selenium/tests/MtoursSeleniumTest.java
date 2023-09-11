@@ -252,14 +252,14 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	private boolean navigateToStartMtoursPage() {
 		if (CommonHelper.isTrue(runlocal)) {
 			try {
-				driverGet(ConfigurationHelper.getTestProperties().getProperty(localhostUrl));
+				driverGet(ConfigurationHelper.getTestPlatformProperty(localhostUrl));
 			} catch (Exception e1) {
 				reportTestFail("MTours is down");
 				return false;
 			}
 		} else {
 			try {
-				driverGet(ConfigurationHelper.getTestProperties().getProperty(remotehostUrl));
+				driverGet(ConfigurationHelper.getTestPlatformProperty(remotehostUrl));
 				// Send future commands to iFrame
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 				ok = ok && waitUntil(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
