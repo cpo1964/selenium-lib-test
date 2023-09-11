@@ -154,7 +154,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		reportCreateStep("setUp TestCase #" + getIteration() + " #");
 
-		setupDriver();
+		launch();
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		// login
 		reportCreateStep("Step #2 - login");
-		ok = waitUntil(mtoursLoginPage.USERNAME, WebelementState.Displayed, 10);
+		ok = waitOn(mtoursLoginPage.USERNAME, WebelementState.Displayed, 10);
 		input(mtoursLoginPage.USERNAME, username);
 		input(mtoursLoginPage.PASSWORD, password);
 		click(mtoursLoginPage.LOGIN);
@@ -217,14 +217,14 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		reportStepPassScreenshot();
 		if ("false".equalsIgnoreCase(runlocal)) {
-			ok = waitUntil(mtoursLoginPage.FLIGHTS, Displayed, 3);
+			ok = waitOn(mtoursLoginPage.FLIGHTS, Displayed, 3);
 			if (ok) {
 				click(mtoursLoginPage.FLIGHTS);
 			}
 		}
 
 		// flights page
-		ok = waitUntil(mtoursFlightsPage.PASSENGERCOUNT, Displayed, 3);
+		ok = waitOn(mtoursFlightsPage.PASSENGERCOUNT, Displayed, 3);
 		if (ok) {
 			input(mtoursFlightsPage.PASSENGERCOUNT, "2");
 			click(mtoursFlightsPage.SERVICECLASS_FIRST);
@@ -232,7 +232,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 
 		// navigate to Home
 		reportCreateStep("Step #3 - navigate to Home");
-		ok = waitUntil(mtoursLoginPage.HOME, Displayed, 3);
+		ok = waitOn(mtoursLoginPage.HOME, Displayed, 3);
 		if (ok || "false".equalsIgnoreCase(runlocal)) {
 			click(mtoursLoginPage.HOME);
 			value = output(mtoursLoginPage.SIGNININFO);
@@ -262,7 +262,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 				driverGet(ConfigurationHelper.getTestPlatformProperty(remotehostUrl));
 				// Send future commands to iFrame
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
-				ok = ok && waitUntil(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
+				ok = ok && waitOn(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
 				if (ok) {
 					reportStepInfo("iframe mit notiz schliessen ...");
 					click(mtoursLoginPage.NOTICE);

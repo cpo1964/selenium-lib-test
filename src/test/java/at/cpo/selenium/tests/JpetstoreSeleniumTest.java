@@ -35,7 +35,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
-import org.openqa.selenium.By;
 
 import com.github.cpo1964.platform.selenium.SeleniumHelper;
 import com.github.cpo1964.platform.selenium.WebelementType;
@@ -126,7 +125,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 
 		reportCreateStep("setUp TestCase #" + getIteration() + " #");
 
-		setupDriver();
+		launch();
 	}
 
 	/**
@@ -197,7 +196,6 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		click("//input[@name='signon']");
 
 		reportStepPassScreenshot();
-		wait(1);
 	}
 
 	/**
@@ -227,12 +225,11 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	private void testStep04(String msg) {
 		reportCreateStep(msg);
-		wait(2);
 
 		click("//a[contains(@href, '/actions/Account.action?signoff=')]");
-		ok = waitUntilBy(By.xpath("//a[contains(@href, '/actions/Account.action?signoff=')]"), NotFound, 3, true);
+		ok = waitOn("//a[contains(@href, '/actions/Account.action?signoff=')]", NotFound, 3, true);
 		validate(ok, "SignOut link is NOT visible");
-		ok = waitUntilBy(By.xpath("//a[contains(@href, 'signonForm')]"), Displayed, 3, true);
+		ok = waitOn("//a[contains(@href, 'signonForm')]", Displayed, 3, true);
 		validate(ok, "SignIn link is visible");
 
 		reportStepPassScreenshot();
