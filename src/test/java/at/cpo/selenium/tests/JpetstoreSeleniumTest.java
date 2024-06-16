@@ -249,7 +249,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 				startUpUrl = ConfigurationHelper.getTestPlatformProperty(remotehostUrl);
 			}
 			reportStepInfo("startUpUrl: " + startUpUrl);
-			driverGet(startUpUrl);
+			navigateTo(startUpUrl);
 			reportTestPass("JPetstore started");
 		} catch (Exception e1) {
 			reportTestFail("JPetstore is down");

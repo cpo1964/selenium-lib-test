@@ -23,6 +23,8 @@
  */
 package at.cpo.selenium.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.util.Collection;
 
@@ -32,7 +34,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -170,7 +171,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 		reportCreateStep("tearDown #");
 		closeBrowser();
 
-		reportEndTest("MTours finished" + System.lineSeparator());
+		reportEndTest("MTours finished - " + getIteration() + System.lineSeparator());
 	}
 
 	/**
@@ -188,7 +189,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 		if (localhostUrl.startsWith("mtours")) {
 			doTestMtours();
 		}
-		Assert.assertTrue(isPassed());
+		assertTrue(isPassed());
 	}
 
 	/**
@@ -252,14 +253,14 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	private boolean navigateToStartMtoursPage() {
 		if (CommonHelper.isTrue(runlocal)) {
 			try {
-				driverGet(ConfigurationHelper.getTestPlatformProperty(localhostUrl));
+				navigateTo(ConfigurationHelper.getTestPlatformProperty(localhostUrl));
 			} catch (Exception e1) {
 				reportTestFail("MTours is down");
 				return false;
 			}
 		} else {
 			try {
-				driverGet(ConfigurationHelper.getTestPlatformProperty(remotehostUrl));
+				navigateTo(ConfigurationHelper.getTestPlatformProperty(remotehostUrl));
 				// Send future commands to iFrame
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 				ok = ok && waitOn(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
