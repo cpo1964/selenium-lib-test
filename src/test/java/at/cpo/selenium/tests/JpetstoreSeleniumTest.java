@@ -85,7 +85,7 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 	 */
 	@Parameterized.Parameters // (name = "{index}: {0}")
 	public static Collection<?> getData() throws IOException {
-		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(),
+		return SeleniumHelper.getTestdata(CommonHelper.getTestDataPathByMandantZone(),
 				JpetstoreSeleniumTest.class.getSimpleName());
 	}
 
@@ -244,9 +244,9 @@ public class JpetstoreSeleniumTest extends SeleniumHelper {
 		String startUpUrl;
 		try {
 			if (CommonHelper.isTrue(runlocal)) {
-				startUpUrl = ConfigurationHelper.getTestPlatformProperty(localhostUrl);
+				startUpUrl = SeleniumHelper.getTestPlatformProperty(localhostUrl);
 			} else {
-				startUpUrl = ConfigurationHelper.getTestPlatformProperty(remotehostUrl);
+				startUpUrl = SeleniumHelper.getTestPlatformProperty(remotehostUrl);
 			}
 			reportStepInfo("startUpUrl: " + startUpUrl);
 			navigateTo(startUpUrl);

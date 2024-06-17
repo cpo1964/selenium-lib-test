@@ -113,7 +113,7 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	 */
 	@Parameterized.Parameters // (name = "{index}: {0}")
 	public static Collection<?> getData() throws IOException, ConfigurationException {
-		return SeleniumHelper.getTestdata(ConfigurationHelper.getTestDataPath(),
+		return SeleniumHelper.getTestdata(CommonHelper.getTestDataPathByMandantZone(),
 				MtoursSeleniumTest.class.getSimpleName());
 	}
 
@@ -253,14 +253,14 @@ public class MtoursSeleniumTest extends SeleniumHelper {
 	private boolean navigateToStartMtoursPage() {
 		if (CommonHelper.isTrue(runlocal)) {
 			try {
-				navigateTo(ConfigurationHelper.getTestPlatformProperty(localhostUrl));
+				navigateTo(SeleniumHelper.getTestPlatformProperty(localhostUrl));
 			} catch (Exception e1) {
 				reportTestFail("MTours is down");
 				return false;
 			}
 		} else {
 			try {
-				navigateTo(ConfigurationHelper.getTestPlatformProperty(remotehostUrl));
+				navigateTo(SeleniumHelper.getTestPlatformProperty(remotehostUrl));
 				// Send future commands to iFrame
 				ok = driverSwitchToIFrame("gdpr-consent-notice");
 				ok = ok && waitOn(mtoursLoginPage.NOTICE, WebelementState.Displayed, 3);
